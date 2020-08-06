@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\carrito;
+use App\pelicula;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class CarritoController extends Controller
+{
+
+    public function index()
+    {
+        $carrito = DB::table('carrito')
+        ->join('cliente', 'cliente.CI','=','carrito.CI_Cliente')
+        ->select('Id','PrecioTotal','Descripcion','Nombre')->get();
+        return view('Carrito/Carrito/index', compact('carrito'));
+    }
+
+
+
+    public function create()
+    {
+        return view('Carrito/Carrito/create');
+    }
+
+
+
+    public function store(Request $request)
+    {
+        $carrito = new Carrito();
+
+        $carrito->CI_Cliente = $request->input('CI');
+        $carrito->PrecioTotal = 0;
+        $carrito->Descripcion = $request->input('descripcion');
+
+        $carrito->save();
+
+        $IdCarrito = $carrito->Id;
+
+        $peliculas = Pelicula::all();
+        return view('Carrito/Carrito/listaProducto',compact('peliculas','IdCarrito'));
+    }
+
+
+
+
+    public function show( $id)
+    {
+        $carrito = DB::table('detallecarrito')
+        ->join('pelicula','pelicula.Id','=','detallecarrito.Id_Pelicula')
+        ->select('Id_Carrito','Id_Pelicula','Cantidad','Subtotal','Nombre','Precio')
+        ->where('Id_Carrito','=',$id)->get();
+
+        return view('Carrito/Carrito/show',compact('carrito'));
+
+    }
+
+
+
+    public function destroy( $id)
+    {
+        Carrito::destroy($id);
+        return redirect()->route('Carrito.index');
+    }
+}

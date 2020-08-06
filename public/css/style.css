@@ -1,0 +1,120 @@
+
+:root{
+    --colorTexto : rgb(95, 110, 5);
+}
+
+
+body{
+    background-image: url('https://fondosmil.com/fondo/3874.jpg');
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+/* Lo que yo hice alv */
+
+#ImgPoster{
+    text-align: center;
+    width: 100%;
+}
+
+#ImgPoster .Titulo{
+    font-size: 5rem;
+    position: relative;
+}
+
+#ImgPoster .TituloCard{
+    position: relative;
+    border-radius: 15px;
+    border: 10px ridge var(--colorTexto);
+    width: 400px;
+    height: 300px;
+}
+
+#Descripcion {
+    text-align: start;
+    margin-top: 2%;
+    margin-right: 20%;
+    margin-left: 20%;
+    position: relative;
+    color: burlywood;
+}
+
+#Descripcion .ActorImg{
+    position: relative;
+    margin-left: 2%;
+    margin-top: 4%;
+    margin-bottom: 2%;
+    border-radius: 10px;
+    border: 5px solid var(--colorTexto);
+    width: 150px;
+    height: 150px;
+}
+
+
+#Carrito{
+    position: relative;
+    margin-left: 2%;
+    width: 200px;
+    height: 150px;
+}
+
+
+
+
+
+ #wrapper {
+    overflow-x: hidden;
+    color: var(--colorTexto);
+ }
+
+
+
+#MenuItem{
+    text-decoration: none;
+    color: var(--colorTexto);
+    background: transparent;
+}
+
+
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.8rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
