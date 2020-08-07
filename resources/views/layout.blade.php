@@ -12,8 +12,17 @@
 
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="/css/style.css">
 
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <title>Pelicula</title>
   </head>
@@ -54,24 +63,44 @@
 
               <span class="navbar-toggler-icon"></span>
             </button>
-
+            {{-- navbar --}}
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdown"
-                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                    style="color: rgb(95, 110, 5)">
-                    Perfil
-                  </a>
 
-                  <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdown"
-                    style="border-radius: 12px">
-                    <a class="dropdown-item" style="color: rgb(95, 110, 5)" href="#">Perfil</a>
-                    <a class="dropdown-item" style="color: rgb(95, 110, 5)" href="#">Configuracion</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" style="color: rgb(95, 110, 5)" href="#">Salir</a>
-                  </div>
-                </li>
+
+
+              <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: rgb(95, 110, 5)" href="{{ route('login') }}">Login</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: rgb(95, 110, 5)" href="{{ route('register') }}">Registrase</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown" >
+                            <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdown"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                style="color: rgb(95, 110, 5)">
+                                Perfil
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdown"
+                                style="border-radius: 12px">
+                                <a class="dropdown-item" style="color: rgb(95, 110, 5)" href="#">{{ Auth::user()->name }}</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" style="color: rgb(95, 110, 5)" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">Salir</a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                      </li>
+                    @endguest
+
               </ul>
             </div>
           </nav>
