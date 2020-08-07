@@ -50,3 +50,7 @@ Route::DELETE('DetalleCarrito/{Id_Carrito}/{Id_Pelicula}/destroy',['as'
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
