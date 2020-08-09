@@ -31,7 +31,7 @@
                 <td class="text-white">{{$datosCliente->Direccion}}</td>
                 <td class="text-white">{{$datosCliente->Telefono}}</td>
                 <td class="text-white">{{$datosCliente->Email}}</td>
-                <td class="text-white"><a class="btn btn-primary" href="{{route('Cliente.edit',$datosCliente->CI)}}">Editar</a>
+                <td><a class="btn btn-primary" href="{{route('Cliente.edit',$datosCliente->CI)}}">Editar</a>
                     <form style="display:inline" action="{{route('Cliente.destroy',$datosCliente->CI)}}" method="POST">
                         {!!csrf_field()!!}
                         {!!method_field('DELETE')!!}

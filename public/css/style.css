@@ -1,5 +1,5 @@
 
-:root{
+ /* :root{
     --colorTexto : rgb(95, 110, 5);
 }
 
@@ -9,8 +9,6 @@ body{
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-
-/* Lo que yo hice alv */
 
 #ImgPoster{
     text-align: center;
@@ -117,4 +115,5 @@ body{
   #wrapper.toggled #sidebar-wrapper {
     margin-left: -15rem;
   }
-}
+} */
+

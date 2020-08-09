@@ -1,52 +1,131 @@
 @extends('layout')
 @section('contenido')
-    <nav><h2 style="text-align: center">Registrar Cliente</h2></nav>
-    <form action="{{route('Cliente.store')}}" method="post">
-        {{ csrf_field() }}
 
-        <div class="container">
+    <div class="container py-4">
 
-            <div class="form-row col-md-10 p-2" >
-                <div class="form-group col-md-5 p-2">
-                    <label  for="">Nombre</label>
-                    <input type="text" name="nombre" class="form-control">
-                </div>
-                <div class="form-group col-md-5 p-2">
-                    <label  for="">Apellido</label>
-                    <input type="text" name="apellido" class="form-control">
-                </div>
-            </div>
+        <div class="row" >
 
-            <div class="form-row col-md-10 p-1">
-                <div class="form-group col-md-5 p-2">
-                    <label  for="">Telefono</label>
-                    <input type="text" name="telefono" class="form-control">
-                </div>
-                <div class="form-group col-md-5 p-2">
-                    <label  for="">Carnet Identidad</label>
-                    <input type="text" name="CI" class="form-control">
-                </div>
-            </div>
+            <div class="col-12 col-sm-10 col-lg-7 mx-auto" >
 
-            <div class="form-group col-md-5 p-2">
-                <label  for="">Fecha De Nacimiento</label>
-                <input type="text" name="fecha" class="form-control">
-            </div>
+                <form class="shadow rounded py-3 px-4"
+                    action="{{route('Cliente.store')}}" method="post">
 
-            <div class="form-group col-md-5 p-2">
-                <label  for="">Direccion</label>
-                <input type="text" name="direccion" class="form-control">
-            </div>
-            
-            <div class="form-group col-md-5 p-2">
-                <label  for="">Email</label>
-                <input type="text" name="email" class="form-control">
-            </div>
-            <p></p>
-            <div class="form-group col-md-6 mb-2 p-2">
-                <button type="submit" class="btn btn-primary"> Guardar </button>
-            </div>
+                    @csrf
 
+                    <h1 class="display-5">Registrar Cliente</h1>
+
+                    <div class="form-group">
+                        <label  for="">Nombre</label>
+                        <input class="form-control bg-light shadow-sm @error('Nombre') is-invalid
+                        @enderror
+                        border-1" value="{{old('Nombre')}}"
+                        type="text"
+                        name="Nombre">
+
+                        @error('Nombre')
+                            <span class="invalided-feedback" role="alert">
+                                <strong>{{$message}}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+
+                    <div class="form-group">
+                        <label  for="">Apellido</label>
+                        <input class="form-control bg-light shadow-sm @error('Apellido') is-invalid
+                        @enderror
+                        border-1"
+                        type="text" value="{{old('Apellido')}}"
+                        name="Apellido">
+
+                        @error('Apellido')
+                            <span class="invalided-feedback" role="alert">
+                                <strong>{{$message}}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+
+                    <div class="form-group">
+                        <label  for="">Telefono</label>
+                        <input class="form-control bg-light shadow-sm @error('Telefono') is-invalid
+                        @enderror
+                        border-1"
+                        type="text" value="{{old('Telefono')}}"
+                        name="Telefono">
+
+                        @error('Telefono')
+                            <span class="invalided-feedback" role="alert">
+                                <strong>{{$message}}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label  for="">Carnet Identidad</label>
+                        <input class="form-control bg-light shadow-sm @error('CI') is-invalid
+                            @enderror
+                            border-1"
+                            type="text" value="{{old('CI')}}"
+                            name="CI">
+
+                            @error('CI')
+                                <span class="invalided-feedback" role="alert">
+                                    <strong>{{$message}}</strong>
+                                </span>
+                            @enderror
+                    </div>
+
+
+                    <div class="form-group">
+                        <label  for="">Fecha De Nacimiento</label>
+                        <input class="form-control bg-light shadow-sm @error('FechaNacimiento') is-invalid
+                            @enderror
+                            border-1" placeholder="yyyy-mm-dd"
+                            type="date" value="{{old('FechaNacimiento')}}"
+                            name="FechaNacimiento" min="1990-01-01">
+
+                            @error('FechaNacimiento')
+                                <span class="invalided-feedback" role="alert">
+                                    <strong>{{$message}}</strong>
+                                </span>
+                            @enderror
+                    </div>
+
+
+                    <div class="form-group">
+                        <label  for="">Direccion</label>
+                        <input class="form-control bg-light shadow-sm @error('Direccion') is-invalid
+                            @enderror
+                            border-1"
+                            type="text" value="{{old('Direccion')}}"
+                            name="Direccion">
+
+                            @error('Direccion')
+                                <span class="invalided-feedback" role="alert">
+                                    <strong>{{$message}}</strong>
+                                </span>
+                            @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label  for="">Email</label>
+                        <input class="form-control bg-light shadow-sm @error('Email') is-invalid
+                            @enderror
+                            border-1"
+                            type="text" value="{{old('Email')}}"
+                            name="Email">
+
+                            @error('Email')
+                                <span class="invalided-feedback" role="alert">
+                                    <strong>{{$message}}</strong>
+                                </span>
+                            @enderror
+                    </div>
+
+                    <button type="submit" class="btn btn-lg btn-primary btn-block"> Guardar </button>
+                </form>
+            </div>
         </div>
-    </form>
+    </div>
 @endsection

@@ -39,24 +39,19 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $cliente = new Cliente();
-        $cliente->CI = $request->input('CI');
-        $cliente->Nombre = $request->input('nombre');
-        $cliente->Apellido = $request->input('apellido');
-        $cliente->Telefono = $request->input('telefono');
-        $cliente->FechaNacimiento = $request->input('fecha');
-        $cliente->Direccion = $request->input('direccion');
-        $cliente->Email = $request->input('email');
-        $cliente->Estado = 1;
 
+        $request->validate([
+            'CI' => 'required',
+            'Nombre' => 'required|min:4',
+            'Apellido' => 'required',
+            'Telefono' => 'required|numeric',
+            'FechaNacimiento' => 'required|date_format:aaaa/mm/dd'
+        ]);
+
+        $cliente = new Cliente( $request->all() );
+        $cliente->Estado = 1;
         $cliente->save();
 
-        // $usuario = new Usuario();
-        // $usuario->Nombre = $request->input('nombre');
-        // $usuario->Correo = $request->input('email');
-        // $usuario->Password = $request->input('password');
-        // $usuario->Categoria = "Cliente";
-        // $usuario->save();
 
         return redirect()->route('Cliente.index');
     }
@@ -69,7 +64,7 @@ class ClienteController extends Controller
      */
     public function show(cliente $cliente)
     {
-        //
+        return view('Cliente/show',compact('cliente'));
     }
 
 
@@ -79,7 +74,7 @@ class ClienteController extends Controller
      * @param  \App\cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id)
+    public function edit( $id )
     {
         $cliente = Cliente::findOrFail($id);
         return view('Cliente/edit', compact('cliente'));
@@ -96,13 +91,15 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::findOrFail($id);
 
-        $cliente->Nombre = $request->input('nombre');
-        $cliente->Apellido = $request->input('apellido');
-        $cliente->Telefono = $request->input('telefono');
-        $cliente->Direccion = $request->input('direccion');
-        $cliente->Email = $request->input('email');
+        $cliente->Nombre = $request->input('Nombre');
+        $cliente->Apellido = $request->input('Apellido');
+        $cliente->Telefono = $request->input('Telefono');
+        $cliente->Direccion = $request->input('Direccion');
+        $cliente->Email = $request->input('Email');
 
         $cliente->update();
+
+
 
         return redirect()->route('Cliente.index');
     }

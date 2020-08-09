@@ -36,6 +36,7 @@ Route::resource('Carrito', 'CarritoController');
 // DETALLE CARRITO
 
 
+// Route::get('DetalleCarrito/{Id_Carrito}/{Id_Pelicula}/edit','DetallecarritoController@edit')->name('Detallecarrito.edit');
 Route::get('DetalleCarrito/{Id_Carrito}/{Id_Pelicula}/edit',['as'
 =>'Detallecarrito.edit','uses'=>'DetallecarritoController@edit']);
 

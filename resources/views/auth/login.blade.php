@@ -4,10 +4,10 @@
 <div class="container" style="margin-top: 5%">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card" style="background: rgba(153, 151, 151, 0.87)">
                 <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
+                <div class="card-body" style="background: rgba(153, 151, 151, 0.452)">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
