@@ -11,6 +11,6 @@ class administrador extends Model
     public $timestamps=false;
 
     protected $fillable=[
-        'CI','Nombre','Apellido','Direccion','Telefono','Email'
+        'CI','Nombre','Apellido','Direccion','Telefono','Email','Estado'
     ];
 }

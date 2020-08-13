@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\pelicula;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PeliculaController extends Controller
 {
@@ -48,7 +49,14 @@ class PeliculaController extends Controller
     {
         $pelicula = Pelicula::findOrFail($id);
 
-        return view('Pelicula/Pelicula/show', compact('pelicula'));
+        //comentarios
+        $comentario = DB::table('comentario')
+            ->join('cliente','cliente.CI','=','comentario.Id_Cliente')
+            ->select('Id','Descripcion','Nombre')
+            ->where('comentario.Id_Pelicula','=',$id)
+            ->get();
+
+        return view('Pelicula/Pelicula/show', compact('pelicula','comentario'));
     }
 
 
@@ -59,7 +67,6 @@ class PeliculaController extends Controller
 
         return view('Pelicula/Pelicula/edit', compact('pelicula'));
     }
-
 
 
     public function update(Request $request,  $id)

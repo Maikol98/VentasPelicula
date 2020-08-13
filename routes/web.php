@@ -21,9 +21,17 @@ Route::get('Lista',function(){
     return view('ListaMejorada');
 });
 
+
+// Route::group(['prefix' => 'Cliente'], function () {
+//     Route::get('index','ClienteController@index')->name('Cliente.index')->middleware(['auth','roles:Admin']);
+//     Route::get('create','ClienteController@create')->name('Cliente.create')->middleware(['auth','roles:Admin']);
+//     Route::post('store','ClienteController@store')->name('Cliente.store')->middleware([]);
+// });
+
+
 Route::resource('Cliente', 'ClienteController');
 
-Route::resource('Administrador', 'AdministradorController');
+Route::resource('Administrador', 'AdministradorController')->middleware(['auth','roles:Cliente,Admin']);
 
 Route::resource('Actor', 'ActorController');
 
@@ -32,6 +40,8 @@ Route::resource('Director', 'DirectorController');
 Route::resource('Pelicula', 'PeliculaController');
 
 Route::resource('Carrito', 'CarritoController');
+
+Route::post('comentario/{Id_Pelicula}','ComentarioController@store')->name('Comentario.store');
 
 // DETALLE CARRITO
 
@@ -55,3 +65,6 @@ Route::DELETE('DetalleCarrito/{Id_Carrito}/{Id_Pelicula}/destroy',['as'
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+

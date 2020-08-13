@@ -11,8 +11,8 @@ class cliente extends Model
     public $timestamps=false;
 
     protected $fillable=[
-        'CI','Nombre','Apellido','Telefono','FechaNacimiento','Direccion','Email'
+        'CI','Nombre','Apellido','Telefono','FechaNacimiento','Direccion','Email','Estado'
     ];
 
-    
+
 }

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','rol','idCliente'
     ];
 
     /**
@@ -36,4 +36,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function hasRoles(array $roles)
+    {
+        foreach($roles as $role)
+        {
+            if($this->rol===$role)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

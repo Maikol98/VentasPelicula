@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\cliente;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function index()
     {
         $cliente = DB::table('cliente')
@@ -21,22 +19,14 @@ class ClienteController extends Controller
         return view('Cliente/index',compact('cliente'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function create()
     {
         return view('Cliente/create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
 
@@ -45,10 +35,21 @@ class ClienteController extends Controller
             'Nombre' => 'required|min:4',
             'Apellido' => 'required',
             'Telefono' => 'required|numeric',
-            'FechaNacimiento' => 'required|date_format:aaaa/mm/dd'
+            'FechaNacimiento' => 'required',
+            'Email' => 'required'
         ]);
+        $contra = $request->input('CI');
 
-        $cliente = new Cliente( $request->all() );
+        $user = new User();
+        $user->name = $request->input('Nombre');
+        $user->email = $request->input('Email');
+        $user->password = bcrypt($contra);
+        $user->idCliente = $request('CI');
+        $user->rol = 'Cliente';
+        $user->save();
+
+        $cliente = new Cliente( $request->all());
+        $cliente->FechaNacimiento = date('Y-m-d', strtotime($request->input('FechaNacimiento')));
         $cliente->Estado = 1;
         $cliente->save();
 
@@ -56,37 +57,24 @@ class ClienteController extends Controller
         return redirect()->route('Cliente.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function show(cliente $cliente)
     {
         return view('Cliente/show',compact('cliente'));
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function edit( $id )
     {
         $cliente = Cliente::findOrFail($id);
         return view('Cliente/edit', compact('cliente'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function update(Request $request, $id)
     {
         $cliente = Cliente::findOrFail($id);
@@ -104,12 +92,8 @@ class ClienteController extends Controller
         return redirect()->route('Cliente.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function destroy($id)
     {
         $cliente = Cliente::findOrFail($id);

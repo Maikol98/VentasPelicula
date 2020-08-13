@@ -1,45 +1,40 @@
 @extends('layout')
 @section('contenido')
-    <nav><h2 style="text-align: center">Modificar Administrador</h2></nav>
+    <div class="container">
+        <div class="row py-4">
+            <div class="col-12 col-sm-10 col-lg-6 mx-auto">
+                <form class="shadow rounded px-3 py-4"
+                    action="{{route('Administrador.update', $administrador->CI)}}" method="post">
+
+                    @method('PUT')
+                    @csrf
+                    <h2 class="display-4">Modificar Administrador</h2>
+
+                        <div class="form-group">
+                            <label  for="">Nombre</label>
+                            <input type="text" name="nombre" value="{{$administrador->Nombre}}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label  for="">Apellido</label>
+                            <input type="text" name="apellido" value="{{$administrador->Apellido}}" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label  for="">Telefono</label>
+                            <input type="text" name="telefono" value="{{$administrador->Telefono}}" class="form-control">
+                        </div>
 
 
-    <form action="{{route('Administrador.update', $administrador->CI)}}" method="post">
+                        <div class="form-group">
+                            <label  for="">Direccion</label>
+                            <input type="text" name="direccion" value="{{$administrador->Direccion}}" class="form-control">
+                        </div>
 
-        {!! method_field('PUT')!!}
-
-        {{ csrf_field() }}
-
-        <div class="container">
-
-            <div class="form-row col-md-10 p-2" >
-                <div class="form-group col-md-5 p-2">
-                    <label  for="">Nombre</label>
-                    <input type="text" name="nombre" value="{{$administrador->Nombre}}" class="form-control">
-                </div>
-                <div class="form-group col-md-5 p-2">
-                    <label  for="">Apellido</label>
-                    <input type="text" name="apellido" value="{{$administrador->Apellido}}" class="form-control">
-                </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-lg btn-primary btn-block"> Guardar </button>
+                        </div>
+                </form>
             </div>
-
-            <div class="form-row col-md-10 p-1">
-                <div class="form-group col-md-5 p-2">
-                    <label  for="">Telefono</label>
-                    <input type="text" name="telefono" value="{{$administrador->Telefono}}" class="form-control">
-                </div>
-            </div>
-
-
-            <div class="form-group col-md-5 p-2">
-                <label  for="">Direccion</label>
-                <input type="text" name="direccion" value="{{$administrador->Direccion}}" class="form-control">
-            </div>
-
-            <p></p>
-            <div class="form-group col-md-6 mb-2 p-2">
-                <button type="submit" class="btn btn-primary"> Guardar </button>
-            </div>
-
         </div>
-    </form>
+    </div>
 @endsection

@@ -83,7 +83,7 @@
                             @enderror
                             border-1" placeholder="yyyy-mm-dd"
                             type="date" value="{{old('FechaNacimiento')}}"
-                            name="FechaNacimiento" min="1990-01-01">
+                            name="FechaNacimiento" min="1950-01-01">
 
                             @error('FechaNacimiento')
                                 <span class="invalided-feedback" role="alert">

@@ -8,7 +8,7 @@
 
     <div class="text-center">
 
-    <table class="table">
+    <table class="table col-10">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Id</th>

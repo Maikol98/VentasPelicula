@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class DetallecarritoController extends Controller
 {
 
-
+    
 
     public function store(Request $request,$id_carrito, $id_pelicula)
     {

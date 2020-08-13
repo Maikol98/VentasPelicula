@@ -37,11 +37,8 @@ class ActorController extends Controller
      */
     public function store(Request $request)
     {
-        $actor = new Actor();
-        $actor->Imagen = $request->input('imagen');
-        $actor->Nombre = $request->input('nombre');
-        $actor->Nacionalidad = $request->input('nacionalidad');
-        $actor->Edad = $request->input('edad');
+
+        $actor = new Actor($request->All());
         $actor->save();
 
         return redirect()->route('Actor.index');
@@ -70,6 +67,7 @@ class ActorController extends Controller
     public function update(Request $request, $id)
     {
         $actor = Actor::findOrFail($id);
+
         $actor->Imagen = $request->input('imagen');
         $actor->Nombre = $request->input('nombre');
         $actor->Nacionalidad = $request->input('nacionalidad');

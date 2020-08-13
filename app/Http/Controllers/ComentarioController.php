@@ -7,46 +7,20 @@ use Illuminate\Http\Request;
 
 class ComentarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+
+    public function store(Request $request, $Id_Pelicula)
     {
-        //
+        $comentario = new Comentario();
+        $comentario->Descripcion = $request->input('Comentario');
+        $comentario->Id_Pelicula = $Id_Pelicula;
+        $comentario->Id_Cliente = auth()->user()->idCliente;
+
+        $comentario->save();
+
+        return redirect()->route('Pelicula.show',$Id_Pelicula);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\comentario  $comentario
-     * @return \Illuminate\Http\Response
-     */
-    public function show(comentario $comentario)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.

@@ -30,16 +30,14 @@ class CarritoController extends Controller
     public function store(Request $request)
     {
         $carrito = new Carrito();
-
-        $carrito->CI_Cliente = $request->input('CI');
+        $carrito->CI_Cliente = auth()->user()->idCliente;
         $carrito->PrecioTotal = 0;
         $carrito->Descripcion = $request->input('descripcion');
-
         $carrito->save();
 
         $IdCarrito = $carrito->Id;
-
         $peliculas = Pelicula::all();
+
         return view('Carrito/Carrito/listaProducto',compact('peliculas','IdCarrito'));
     }
 

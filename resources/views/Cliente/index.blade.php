@@ -2,23 +2,20 @@
 
 @section('contenido')
 
-<p></p>
-<div class="container p-1">
+<div class="container py-4">
     <p><a class="btn btn-success" href="{{route('Cliente.create')}}">Añadir Cliente</a></p>
 
-    <div class="text-center">
-
-    <table class="table">
+    <table class="table table-responsive">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">Carnet</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">Fecha Nacimiento</th>
-                <th scope="col">Direccion</th>
-                <th scope="col">Telefono</th>
-                <th scope="col">Correo</th>
-                <th scope="col">Acciones</th>
+            <th scope="col">Carnet</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Fecha Nacimiento</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -40,6 +37,5 @@
             @endforeach
         </tbody>
     </table>
-</div>
 </div>
 @endsection

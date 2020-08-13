@@ -43,14 +43,21 @@
 
     <h1>Comentarios</h1>
     <div class="col">
-        <textarea name="comentario" id="" cols="50" rows="4"></textarea>
-        <p></p>
-        <a href="#" class="btn btn-success">COMENTAR</a>
+        <form action="{{route('Comentario.store',$pelicula->Id)}}" method="post">
+            @csrf
+            <textarea name="Comentario" id="" cols="50" rows="4"></textarea>
+            <button type="submit" class="btn btn-primary"> Guardar </button>
+        </form>
     </div>
     <p></p>
 
+    @foreach ($comentario as $dato)
+        <hr>
+        <h6>{{$dato->Nombre}}</h6>
+        <h5>{{$dato->Descripcion}}</h5>
+    @endforeach
 
-    <h5>Nombre de la persona</h5>
+    {{-- <h5>Nombre de la persona</h5>
     <h6>Comentario</h6>
     <hr>
     <h5>Nombre de la persona</h5>
@@ -66,7 +73,7 @@
     <h6>Comentario</h6>
     <hr>
     <h5>Nombre de la persona</h5>
-    <h6>Comentario</h6>
+    <h6>Comentario</h6> --}}
 
     <a href="{{route('Pelicula.index')}}" class="btn btn-primary"> Volver </a>
 

@@ -8,7 +8,7 @@
 
     <div class="text-center">
 
-    <table class="table">
+    <table class="table table-responsive">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Carnet</th>
@@ -31,8 +31,8 @@
                 <td class="text-white">{{$datos->Email}}</td>
                 <td class="text-white"><a class="btn btn-primary" href="{{route('Administrador.edit',$datos->CI)}}">Editar</a>
                     <form style="display:inline" action="{{route('Administrador.destroy',$datos->CI)}}" method="POST">
-                        {!!csrf_field()!!}
-                        {!!method_field('DELETE')!!}
+                        @csrf
+                        @method('DELETE')
                         <button type="submit" class="btn btn-danger">Elimnar</button>
                     </form></td>
             @endforeach
