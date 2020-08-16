@@ -30,9 +30,7 @@ class PagoController extends Controller
         if ($pago == null) {
             return view('Pedido/Pago/Tarjeta',compact('pedido'));
         }
-        
         return view('Pedido/Pago/Pago');
-
     }
 
 

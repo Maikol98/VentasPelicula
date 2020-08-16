@@ -23,14 +23,15 @@ class PedidoController extends Controller
                 ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
                 ->where('cliente.CI','=',auth()->user()->idCliente)
                 ->get();
+            dd($pedido);
             return view('Pedido/Pedido/index',compact('pedido'));
         }
-        
+
         $pedido = DB::table('pedido')
             ->join('cliente','cliente.CI','=','pedido.Ci_Cliente')
             ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
             ->get();
-
+            dd($pedido);
         return view('Pedido/Pedido/index',compact('pedido'));
     }
 
@@ -92,7 +93,7 @@ class PedidoController extends Controller
             ->join('pelicula','pelicula.Id','=','detallepedido.Id_Pelicula')
             ->select('Id_Pedido','Id_Pelicula','Cantidad','Subtotal','Nombre')
             ->where('Id_Pedido','=',$id)->get();
-
+        dd($pedido);
         return view('Pedido/DetallePedido/index',compact('pedido','id'));
     }
 

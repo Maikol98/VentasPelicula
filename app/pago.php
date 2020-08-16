@@ -11,6 +11,6 @@ class pago extends Model
     public $timestamps=false;
 
     protected $fillable=[
-        'Id','TipoPago'
+        'Id','TipoPago','Monto','Fecha','NumeroTarjeta','Codigo','Id_Pedido'
     ];
 }

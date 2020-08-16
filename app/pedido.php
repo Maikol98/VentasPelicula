@@ -11,6 +11,6 @@ class pedido extends Model
     public $timestamps=false;
 
     protected $fillable=[
-        'Id','FechaPedido','PrecioTotal','Estado','Direccion','Descripcion'
+        'Id','FechaPedido','PrecioTotal','Estado','Direccion','Descripcion','Ci_Cliente'
     ];
 }
