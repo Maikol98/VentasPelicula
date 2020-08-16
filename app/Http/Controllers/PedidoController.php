@@ -16,7 +16,8 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->rol == 'Cliente'){
+        $rol = auth()->user()->rol;
+        if( $rol == "Cliente"){
             $pedido = DB::table('pedido')
                 ->join('cliente','cliente.CI','=','pedido.Ci_Cliente')
                 ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
@@ -39,7 +40,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        if (auth()->user()->rol === 'Admin') {
+        if (auth()->user()->rol == 'Admin') {
         return view('Pedido/Pedido/Admin');
         }
         return view('Pedido/Pedido/create');
@@ -90,6 +91,7 @@ class PedidoController extends Controller
             ->join('pelicula','pelicula.Id','=','detallepedido.Id_Pelicula')
             ->select('Id_Pedido','Id_Pelicula','Cantidad','Subtotal','Nombre')
             ->where('Id_Pedido','=',$id)->get();
+
         return view('Pedido/DetallePedido/index',compact('pedido','id'));
     }
 

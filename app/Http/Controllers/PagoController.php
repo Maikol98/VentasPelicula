@@ -22,13 +22,17 @@ class PagoController extends Controller
 
 
     public function create($idPedido)
-    {   $pedido = DB::table('pedido')
+    {
+        $pedido = DB::table('pedido')
             ->where('Id','=',$idPedido)->first();
         $pago = DB::table('pago')->where('Id_Pedido')->first();
-        if ($pago === null) {
-            return view('Pedido/Pago/Pago');
+
+        if ($pago == null) {
+            return view('Pedido/Pago/Tarjeta',compact('pedido'));
         }
-        return view('Pedido/Pago/Tarjeta',compact('pedido'));
+        
+        return view('Pedido/Pago/Pago');
+
     }
 
 

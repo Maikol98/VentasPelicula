@@ -2,7 +2,7 @@
 @section('contenido')
     <div class="row py-4">
         <div class="col-12 col-sm-10 col-lg-5 mx-auto">
-            @if (auth()->user()->rol === 'Cliente')
+            @if (auth()->user()->rol == 'Cliente')
                 <form class="shadow rounded px-3 py-4"
                     action="{{route('Pago.store',$pedido->Id)}}" method="post">
                     @csrf
