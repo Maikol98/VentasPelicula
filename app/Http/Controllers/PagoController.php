@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\pago;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PagoController extends Controller
 {
@@ -14,30 +15,52 @@ class PagoController extends Controller
      */
     public function index()
     {
-        //
+        $pago = Pago::all();
+        return view();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+
+    public function create($idPedido)
+    {   $pedido = DB::table('pedido')
+            ->where('Id','=',$idPedido)->first();
+        $pago = DB::table('pago')->where('Id_Pedido')->first();
+        if ($pago === null) {
+            return view('Pedido/Pago/Pago');
+        }
+        return view('Pedido/Pago/Tarjeta',compact('pedido'));
+    }
+
+
+
+    public function store(Request $request,$idPedido)
     {
-        //
+        $pedido = new pedido($request->all());
+        $pedido->TipoPago = 'Tarjeta';
+        $pedido->Fecha = date('Y-m-d');
+        $pedido->Id_Pedido = $idPedido;
+
+        $pedido->save();
+        DB::table('pedido')->where('Id','=',$idPedido)->update(['Estado' => 'En Proceso']);
+
+        return redirect()->route('Pedido.index');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function efectivo($idPedido){
+        $dato = DB::table('pedido')
+            ->where('Id','=',$idPedido)->first();
 
+        $pedido = new pedido();
+        $pedido->TipoPago = 'Efectivo';
+        $pedido->Fecha = date('Y-m-d');
+        $pedido->Monto = $dato->Monto;
+        $pedido->Id_Pedido = $idPedido;
+
+        $pedido->save();
+        DB::table('pedido')->where('Id','=',$idPedido)->update(['Estado' => 'En Proceso']);
+
+        return redirect()->route('Pedido.index');
+    }
     /**
      * Display the specified resource.
      *

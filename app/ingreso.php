@@ -11,6 +11,6 @@ class ingreso extends Model
     public $timestamps=false;
 
     protected $fillable=[
-        'Id','PrecioTotal','Fecha'
+        'Id','PrecioTotal','Fecha','Estado'
     ];
 }

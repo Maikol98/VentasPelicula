@@ -38,11 +38,11 @@
             <hr>
             <div class="list-group list-group-flush">
                 <a href="{{route('Cliente.index')}}" class="list-group-item text-white" id="MenuItem">Cliente</a>
-                <a href="<?php echo route('Administrador.index')?>" class="list-group-item text-white" id="MenuItem">Administrador</a>
-                <a href="<?php echo route('Pelicula.index')?>" class="list-group-item text-white" id="MenuItem">Peliculas</a>
-                <a href="#" class="list-group-item text-white" id="MenuItem">Pedido</a>
-                <a href="<?php echo route('Carrito.create')?>" class="list-group-item text-white" id="MenuItem">Carrito</a>
-                <a href="<?php echo route('Carrito.index')?>" class="list-group-item text-white" id="MenuItem">Todos Los Carritos</a>
+                <a href="{{route('Administrador.index')}}" class="list-group-item text-white" id="MenuItem">Administrador</a>
+                <a href="{{route('Pelicula.index')}}" class="list-group-item text-white" id="MenuItem">Peliculas</a>
+                <a href="{{route('Pedido.index')}}" class="list-group-item text-white" id="MenuItem">Pedido</a>
+                <a href="{{route('Carrito.create')}}" class="list-group-item text-white" id="MenuItem">Carrito</a>
+                <a href="{{route('Carrito.index')}}" class="list-group-item text-white" id="MenuItem">Todos Los Carritos</a>
                 <a href="#" class="list-group-item text-white" id="MenuItem">Ingreso</a>
             </div>
         </div>

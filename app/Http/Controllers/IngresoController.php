@@ -4,82 +4,57 @@ namespace App\Http\Controllers;
 
 use App\ingreso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IngresoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function index()
     {
-        //
+        $ingreso = DB::table('ingreso')
+            ->join('administrador','administrador.CI','=','ingreso.Id_Administrador')
+            ->select('Id','PrecioTotal','Fecha','Nombre')
+            ->where('ingreso.Estado','=',1)->get();
+
+        return view('Pelicula/Ingreso/index',compact('ingreso'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $ingreso = new Ingreso();
+        $ingreso->PrecioTotal = 0;
+        $ingreso->fecha = date('y-m-d');
+        $ingreso->Id_Administrador = auth()->user()->idCliente;
+        $ingreso->Estado = 1;
+        $ingreso->save();
+
+        $Id = $ingreso->Id;
+
+        return redirect()->route('Detalleingreso.create',$Id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ingreso  $ingreso
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ingreso $ingreso)
+
+
+    public function show($id)
     {
-        //
+        $ingreso = DB::table('detalleingreso')
+            ->join('pelicula','pelicula.Id','=','detalleingreso.Id_Pelicula')
+            ->select('Id_Ingreso','Id_Pelicula','Nombre','Cantidad','detalleingreso.Precio','Sutotal')
+            ->where('detalleingreso.Id_Ingreso','=',$id)->get();
+
+            return view('Pelicula/Ingreso/Indexdetalle',compact('ingreso'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ingreso  $ingreso
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ingreso $ingreso)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ingreso  $ingreso
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ingreso $ingreso)
+    public function destroy($id)
     {
-        //
-    }
+        $ingreso = Ingreso::findOrFail($id);
+        $ingreso->Estado = 0;
+        $ingreso->update();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ingreso  $ingreso
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ingreso $ingreso)
-    {
-        //
+        return redirect()->route('Ingreso.index');
     }
 }

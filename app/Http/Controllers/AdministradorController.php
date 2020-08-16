@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\administrador;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -39,13 +40,18 @@ class AdministradorController extends Controller
      */
     public function store(Request $request)
     {
-        $administrador = new Administrador();
-        $administrador->CI = $request->input('CI');
-        $administrador->Nombre = $request->input('nombre');
-        $administrador->Apellido = $request->input('apellido');
-        $administrador->Direccion = $request->input('direccion');
-        $administrador->Email = $request->input('email');
-        $administrador->Telefono = $request->input('telefono');
+        $contra = $request->input('CI');
+
+        $user = new User();
+        $user->name = $request->input('Nombre');
+        $user->email = $request->input('Email');
+        $user->password = bcrypt($contra);
+        $user->idCliente = $request->input('CI');
+        $user->rol = 'Admin';
+        $user->save();
+
+
+        $administrador = new Administrador($request->all());
         $administrador->Estado = 1;
 
         $administrador->save();

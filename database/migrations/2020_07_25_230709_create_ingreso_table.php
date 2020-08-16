@@ -17,6 +17,7 @@ class CreateIngresoTable extends Migration
             $table->Increments('Id');
             $table->float('PrecioTotal');
             $table->date('Fecha');
+            $table->integer('Estado');
             $table->integer('Id_Administrador')->unsigned();
             $table->foreign('Id_Administrador')->references('CI')->on('administrador')
             ->onDelete('cascade');

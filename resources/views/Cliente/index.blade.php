@@ -34,6 +34,7 @@
                         {!!method_field('DELETE')!!}
                         <button type="submit" class="btn btn-danger">Elimnar</button>
                     </form></td>
+                </tr>
             @endforeach
         </tbody>
     </table>

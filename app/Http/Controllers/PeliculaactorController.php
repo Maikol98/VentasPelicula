@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\peliculaactor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PeliculaactorController extends Controller
 {
@@ -24,7 +25,7 @@ class PeliculaactorController extends Controller
      */
     public function create()
     {
-
+        return view('Pelicula/Actor/Pelicula');
     }
 
     /**

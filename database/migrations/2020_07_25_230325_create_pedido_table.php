@@ -19,7 +19,7 @@ class CreatePedidoTable extends Migration
             $table->float('PrecioTotal');
             $table->string('Estado');
             $table->string('Direccion');
-            $table->string('Descripcion');
+            $table->string('Descripcion')->nullable();
             $table->integer('Ci_Cliente')->unsigned();
             $table->foreign('Ci_Cliente')->references('CI')->on('cliente')
             ->onDelete('cascade');

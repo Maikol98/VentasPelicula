@@ -12,17 +12,17 @@
 
                         <div class="form-group">
                             <label  for="">Nombre</label>
-                            <input type="text" name="nombre" class="form-control">
+                            <input type="text" name="Nombre" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label  for="">Apellido</label>
-                            <input type="text" name="apellido" class="form-control">
+                            <input type="text" name="Apellido" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label  for="">Telefono</label>
-                            <input type="text" name="telefono" class="form-control">
+                            <input type="text" name="Telefono" class="form-control">
                         </div>
                         <div class="form-group">
                             <label  for="">Carnet Identidad</label>
@@ -32,12 +32,12 @@
 
                         <div class="form-group">
                             <label  for="">Direccion</label>
-                            <input type="text" name="direccion" class="form-control">
+                            <input type="text" name="Direccion" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label  for="">Email</label>
-                            <input type="email" name="email" class="form-control">
+                            <input type="email" name="Email" class="form-control">
                         </div>
                         <p></p>
                         <button type="submit" class="btn btn-lg btn-primary btn-block"> Guardar </button>

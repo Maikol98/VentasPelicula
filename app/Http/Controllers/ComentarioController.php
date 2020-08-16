@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\comentario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ComentarioController extends Controller
 {
@@ -51,8 +52,11 @@ class ComentarioController extends Controller
      * @param  \App\comentario  $comentario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(comentario $comentario)
+    public function destroy($id)
     {
-        //
+        $comentario=comentario::findOrFail($id);
+        $comen=$comentario->IdCurso;
+        DB::table('comentario')->where('Id','=',$id)->delete();
+        return redirect()->route('Pelicula.show',$comen);
     }
 }

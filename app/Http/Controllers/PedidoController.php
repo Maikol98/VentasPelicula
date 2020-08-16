@@ -16,8 +16,8 @@ class PedidoController extends Controller
     public function index()
     {
         $pedido = DB::table('pedido')
-            ->join('cliente','cliente.CI','=','pelicula.Ci_Cliente')
-            ->select('Id','FechaPedido','PrecioTotal','Estado','Nombre')
+            ->join('cliente','cliente.CI','=','pedido.Ci_Cliente')
+            ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
             ->get();
 
         return view('Pedido/Pedido/index',compact('pedido'));
@@ -30,6 +30,9 @@ class PedidoController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->rol === 'Admin') {
+        return view('Pedido/Pedido/Admin');
+        }
         return view('Pedido/Pedido/create');
     }
 
@@ -41,7 +44,20 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pedido = new Pedido($request->all());
+        $pedido->FechaPedido = date('Y-m-d');
+        $pedido->PrecioTotal = 0;
+        $pedido->Estado = 'En Proceso';
+
+        if (auth()->user()->rol === 'Admin') {
+            $pedido->Ci_Cliente = $request->input('cliente');
+        }else{
+            $pedido->Ci_Cliente = auth()->user()->idCliente;
+        }
+
+        $pedido->save();
+        $pedidoId = $pedido->Id;
+        return redirect()->route('Detallepedido.index',$pedidoId);
     }
 
     /**
@@ -50,9 +66,13 @@ class PedidoController extends Controller
      * @param  \App\pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function show(pedido $pedido)
+    public function show( $id)
     {
-        //
+        $pedido = DB::table('detallepedido')
+            ->join('pelicula','pelicula.Id','=','detallepedido.Id_Pelicula')
+            ->select('Id_Pedido','Id_Pelicula','Cantidad','Subtotal','Nombre')
+            ->where('Id_Pedido','=',$id)->get();
+        return view('Pedido/DetallePedido/index',compact('pedido','id'));
     }
 
     /**

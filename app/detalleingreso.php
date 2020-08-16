@@ -11,6 +11,6 @@ class detalleingreso extends Model
     public $timestamps=false;
 
     protected $fillable=[
-        'Id_Pelicula','Id_Ingreso','Cantidad','Subtotal'
+        'Id_Pelicula','Id_Ingreso','Cantidad','Subtotal','Precio'
     ];
 }

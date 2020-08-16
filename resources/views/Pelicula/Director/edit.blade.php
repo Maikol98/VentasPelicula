@@ -1,39 +1,40 @@
 @extends('layout')
 @section('contenido')
-    <nav><h2 style="text-align: center">Modificar Director</h2></nav>
-    <form action="{{route('Director.update', $director->Id)}}" method="post">
 
-        {!! method_field('PUT')!!}
-        {{ csrf_field() }}
+    <div class="container">
+        <div class="row py-4">
+            <div class="col-12 col-sm-10 col-lg-6 mx-auto">
+                <form class="shadow rounded px-3 py-3"
+                    action="{{route('Director.update', $director->Id)}}" method="post">
 
-        <div class="container">
+                    @method('PUT')
+                    @csrf
+                    <h2 class="display-4">Modificar Director</h2>
+                    <div class="form-group">
+                        <label  for="">Nombre</label>
+                        <input type="text" value="{{ $director->Nombre }}" name="nombre" class="form-control">
+                    </div>
 
-            <div class="form-row col-md-10 p-2" >
-                <div class="form-group col-md-5 p-2">
-                    <label  for="">Nombre</label>
-                    <input type="text" value="{{ $director->Nombre }}" name="nombre" class="form-control">
-                </div>
+                    <div class="form-group">
+                        <label  for="">Imagen</label>
+                        <input type="text" value="{{ $director->Imagen }}" name="imagen" class="form-control">
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col">
+                            <label  for="">Nacionalidad</label>
+                            <input type="text" value="{{ $director->Nacionalidad }}" name="nacionalidad" class="form-control">
+                        </div>
+
+                        <div class="col">
+                            <label  for="">Edad</label>
+                            <input type="text" value="{{ $director->Edad }}" name="edad" class="form-control">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-primary btn-block"> Guardar </button>
+                    <a href="{{route('Director.index')}}" class="btn btn-lg btn-outline-dark btn-block">Volver</a>
+                </form>
             </div>
-
-            <div class="form-group col-md-5 p-2">
-                <label  for="">Imagen</label>
-                <input type="text" value="{{ $director->Imagen }}" name="imagen" class="form-control">
-            </div>
-
-            <div class="form-group col-md-5 p-2">
-                <label  for="">Nacionalidad</label>
-                <input type="text" value="{{ $director->Nacionalidad }}" name="nacionalidad" class="form-control">
-            </div>
-
-            <div class="form-group col-md-5 p-2">
-                <label  for="">Edad</label>
-                <input type="text" value="{{ $director->Edad }}" name="edad" class="form-control">
-            </div>
-            <p></p>
-            <div class="form-group col-md-6 mb-2 p-2">
-                <button type="submit" class="btn btn-primary"> Guardar </button>
-            </div>
-
         </div>
-    </form>
+    </div>
 @endsection

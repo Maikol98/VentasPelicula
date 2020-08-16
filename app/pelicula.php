@@ -11,6 +11,8 @@ class pelicula extends Model
     public $timestamps=false;
 
     protected $fillable=[
-        'Id','Nombre','Descripcion','Precio','Stock','Poster','Trailer','Distribucion','Valoracion'
+        'Id','Nombre','Descripcion','Precio','Stock',
+        'Poster','Trailer','Distribucion','Año','Categoria',
+        'Resolucion', 'Idioma','Duracion'
     ];
 }

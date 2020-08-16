@@ -27,17 +27,8 @@ class PeliculaController extends Controller
 
     public function store(Request $request)
     {
-        $pelicula = new Pelicula();
-        $pelicula->Nombre = $request->input('nombre');
-        $pelicula->Descripcion = $request->input('descripcion');
-        $pelicula->Precio = $request->input('precio');
+        $pelicula = new Pelicula($request->all());
         $pelicula->Stock = 0;
-        $pelicula->Poster = $request->input('poster');
-        $pelicula->Trailer = $request->input('trailer');
-        $pelicula->Distribucion = $request->input('distribucion');
-        $pelicula->Categoria = $request->input('categoria');
-        $pelicula->Valoracion = 0.0;
-
         $pelicula->save();
 
         return redirect()->route('Pelicula.index');

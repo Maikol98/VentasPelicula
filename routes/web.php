@@ -22,16 +22,40 @@ Route::get('Lista',function(){
 });
 
 
-// Route::group(['prefix' => 'Cliente'], function () {
-//     Route::get('index','ClienteController@index')->name('Cliente.index')->middleware(['auth','roles:Admin']);
-//     Route::get('create','ClienteController@create')->name('Cliente.create')->middleware(['auth','roles:Admin']);
-//     Route::post('store','ClienteController@store')->name('Cliente.store')->middleware([]);
-// });
+
+//RUTAS PARA INGRESO
+Route::resource('Ingreso', 'IngresoController');
+
+//RUTAS PARA DETALLEINGRESO
+Route::get('DetalleIngreso/{Id}','DetalleingresoController@create')->name('Detalleingreso.create');
+Route::get('Detalleingreso/{IdIngreso}/{IdPelicula}/edit','DetalleingresoController@edit')->name('Detalleingreso.edit');
+Route::post('DetalleIngreso/{Id}','DetalleingresoController@store')->name('Detalleingreso.store');
+Route::put('Detalleingreso/{IdIngreso}/{IdPelicula}','DetalleingresoController@update')->name('Detalleingreso.update');
+Route::delete('Detalleingreso/{IdIngreso}/{IdPelicula}','DetalleingresoController@destroy')->name('Detalleingreso.destroy');
+
+//PEDIDOS
+route::get('Pedido','PedidoController@index')->name('Pedido.index');
+route::get('Pedido/create','PedidoController@create')->name('Pedido.create');
+route::post('Pedido','PedidoController@store')->name('Pedido.store');
+route::get('Pedido/{id}','PedidoController@show')->name('Pedido.show');
+
+//PAGOS
+route::get('Pago','PagoController@index')->name('Pago.index');
+route::get('Pago/{Id}','PagoController@create')->name('Pago.create');
+route::post('Pago/{Id}','PagoController@store')->name('Pago.store');
+route::post('Pago/{Id}/Efectivo','PagoController@efectivo')->name('Pago.efectivo');
+
+//DETALLE PEDIDO
+route::get('Detalle/{id}','DetallepedidoController@index')->name('Detallepedido.index');
+route::post('Detalle/{id_Pelicula}/{id_Pedido}','DetallepedidoController@store')->name('Detallepedido.store');
+route::delete('Detalle/{id_Pelicula}/{id_Pedido}','DetallepedidoController@destroy')->name('Detallepedido.destroy');
+
 
 
 Route::resource('Cliente', 'ClienteController');
 
-Route::resource('Administrador', 'AdministradorController')->middleware(['auth','roles:Cliente,Admin']);
+// ->middleware(['auth','roles:Cliente,Admin'])
+Route::resource('Administrador', 'AdministradorController');
 
 Route::resource('Actor', 'ActorController');
 
@@ -43,12 +67,14 @@ Route::resource('Carrito', 'CarritoController');
 
 Route::post('comentario/{Id_Pelicula}','ComentarioController@store')->name('Comentario.store');
 
+
 // DETALLE CARRITO
 
+Route::get('DetalleCarrito/{Id_Carrito}/{Id_Pelicula}/edit','DetallecarritoController@edit')
+    ->name('Detallecarrito.edit');
 
-// Route::get('DetalleCarrito/{Id_Carrito}/{Id_Pelicula}/edit','DetallecarritoController@edit')->name('Detallecarrito.edit');
-Route::get('DetalleCarrito/{Id_Carrito}/{Id_Pelicula}/edit',['as'
-=>'Detallecarrito.edit','uses'=>'DetallecarritoController@edit']);
+// Route::get('DetalleCarrito/{Id_Carrito}/{Id_Pelicula}/edit',['as'
+// =>'Detallecarrito.edit','uses'=>'DetallecarritoController@edit']);
 
 Route::Post('DetalleCarrito/{Id_Carrito}/{Id_Pelicula}',['as'
 =>'Detallecarrito.store','uses'=>'DetallecarritoController@store']);

@@ -77,4 +77,5 @@ class ActorController extends Controller
         return redirect()->route('Actor.index');
     }
 
+
 }

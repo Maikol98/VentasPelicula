@@ -44,7 +44,7 @@ class ClienteController extends Controller
         $user->name = $request->input('Nombre');
         $user->email = $request->input('Email');
         $user->password = bcrypt($contra);
-        $user->idCliente = $request('CI');
+        $user->idCliente = $request->input('CI');
         $user->rol = 'Cliente';
         $user->save();
 

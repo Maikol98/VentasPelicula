@@ -6,8 +6,12 @@
                 <form class="shadow rounded px-3 py-3"
                     action="{{route('Pedido.store')}}" method="post">
                     @csrf
-                    <h1 class="display-4">Nuevo Pedido</h1>
+                    <h1 class="display-4">Nuevo Pedido Admin</h1>
                     <hr>
+                    <div class="form-group">
+                        <label for="">Ci Cliente</label>
+                        <input type="text" name="cliente"class="form-control">
+                    </div>
                     <div class="form-group">
                         <label for=""> Direccion</label>
                         <input type="text" name="Direccion" class="form-control">

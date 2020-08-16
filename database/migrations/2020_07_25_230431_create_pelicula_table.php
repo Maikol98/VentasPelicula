@@ -23,7 +23,10 @@ class CreatePeliculaTable extends Migration
             $table->string('Trailer');
             $table->string('Distribucion');
             $table->string('Categoria');
-            $table->float('Valoracion');
+            $table->string('Duracion');
+            $table->string('Resolucion');
+            $table->string('Idioma');
+            $table->string('Año');
         });
     }
 

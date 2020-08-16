@@ -17,6 +17,7 @@ class CreateDetalleingresoTable extends Migration
             $table->integer('Id_Ingreso')->unsigned();
             $table->integer('Id_Pelicula')->unsigned();
             $table->integer('Cantidad');
+            $table->float('Precio');
             $table->float('Sutotal');
             $table->primary(['Id_Ingreso','Id_Pelicula']);
             $table->foreign('Id_Ingreso')->references('Id')->on('ingreso')

@@ -1,53 +1,58 @@
 @extends('layout')
 @section('contenido')
-    <nav><h2 style="text-align: center">Modificar Datos de la Pelicula</h2></nav>
-    <form action="{{route('Pelicula.update',$pelicula->Id)}}" method="post">
 
-        {!! method_field('PUT')!!}
-        {{ csrf_field() }}
+    <div class="Container">
+        <div class="row py-3">
+            <div class="col-12 col-sm-10 col-lg-6 mx-auto">
+                <form class="shadow rounded px-3 py-3"
+                action="{{route('Pelicula.update',$pelicula->Id)}}" method="post">
 
-        <div class="container" style="padding-left: 15%">
+                @method('PUT')
+                @csrf
 
-            <div class="form-group col-md-6 p-2">
-                <label  for="">Nombre</label>
-                <input type="text" value="{{$pelicula->Nombre}}" name="nombre" class="form-control">
-            </div>
+                <h2 class="display-5">Modificar Datos de la Pelicula</h2>
 
-            <div class="form-group col-md-5 p-2">
-                <label  for="">Descripcion</label>
-                <textarea name="descripcion" aria-valuetext="asd" id="input" cols="52" rows="5" ></textarea>
+                <div class="form-group">
+                    <label  for="">Nombre</label>
+                    <input type="text" value="{{$pelicula->Nombre}}" name="nombre" class="form-control">
+                </div>
 
-            </div>
+                <div class="form-group">
+                    <label  for="">Descripcion</label>
+                        <div class="col">
+                        <textarea name="descripcion" id="input" cols="50%" rows="4%" ></textarea>
+                    </div>
+                </div>
 
-                <div class="form-group col-md-5 p-2">
+                <div class="form-group col-4">
                     <label  for="">Precio</label>
                     <input type="text" value="{{$pelicula->Precio}}" name="precio" class="form-control">
                 </div>
 
-            <div class="form-group col-md-5 p-2">
-                <label  for="">Poster</label>
-                <input type="text" value="{{$pelicula->Poster}}" name="poster" class="form-control">
-            </div>
+                <div class="form-group">
+                    <label  for="">Poster</label>
+                    <input type="text" value="{{$pelicula->Poster}}" name="poster" class="form-control">
+                </div>
 
-            <div class="form-group col-md-5 p-2">
-                <label  for="">Trailer</label>
-                <input type="text" value="{{$pelicula->Trailer}}" name="trailer" class="form-control">
-            </div>
+                <div class="form-group">
+                    <label  for="">Trailer</label>
+                    <input type="text" value="{{$pelicula->Trailer}}" name="trailer" class="form-control">
+                </div>
 
-            <div class="form-group col-md-5 p-2">
-                <label  for="">Distribucion</label>
-                <input type="text" value="{{$pelicula->Distribucion}}" name="distribucion" class="form-control">
+                <div class="form-group row">
+                    <div class="col">
+                        <label  for="">Distribucion</label>
+                        <input type="text" value="{{$pelicula->Distribucion}}" name="distribucion" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label  for="">Categoria</label>
+                        <input type="text" value="{{$pelicula->Categoria}}" name="categoria" class="form-control">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary btn-block"> Actualizar </button>
+                <a href="{{route('Pelicula.index')}}" class="btn btn-lg btn-outline-dark btn-block"> Volver</a>
+            </form>
             </div>
-
-            <div class="form-group col-md-5 p-2">
-                <label  for="">Categoria</label>
-                <input type="text" value="{{$pelicula->Categoria}}" name="categoria" class="form-control">
-            </div>
-            <p></p>
-            <div class="form-group col-md-6 mb-2 p-2">
-                <button type="submit" class="btn btn-primary"> Guardar </button>
-            </div>
-
         </div>
-    </form>
+    </div>
 @endsection

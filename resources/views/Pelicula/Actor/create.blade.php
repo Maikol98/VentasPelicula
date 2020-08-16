@@ -5,7 +5,7 @@
             <form class="shadow rounded px-3 py-4"
                 action="{{route('Actor.store')}}" method="post">
 
-                {{ csrf_field() }}
+                @csrf
 
                 <h1 class="display-4">Registrar Actor</h2>
                 <hr>
@@ -13,22 +13,24 @@
                     <label  for="">Nombre</label>
                     <input type="text" name="Nombre" class="form-control">
                 </div>
-
+                
                 <div class="form-group">
                     <label  for="">Imagen</label>
                     <input type="text" name="Imagen" class="form-control">
                 </div>
+                <div class="form-group row justify-content-center">
+                    <div class="col">
+                        <label  for="">Nacionalidad</label>
+                        <input type="text" name="Nacionalidad" class="form-control">
+                    </div>
 
-                <div class="form-group">
-                    <label  for="">Nacionalidad</label>
-                    <input type="text" name="Nacionalidad" class="form-control">
-                </div>
-
-                <div class="form-group">
-                    <label  for="">Edad</label>
-                    <input type="text" name="Edad" class="form-control">
+                    <div class="col">
+                        <label  for="">Edad</label>
+                        <input type="text" name="Edad" class="form-control">
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary btn-block"> Guardar </button>
+                <a href="{{route('Actor.index')}}" class="btn btn-lg btn-outline-dark btn-block"> Volver</a>
             </form>
         </div>
     </div>
