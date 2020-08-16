@@ -16,7 +16,7 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->rol === 'Cliente'){
+        if(auth()->user()->rol == 'Cliente'){
             $pedido = DB::table('pedido')
                 ->join('cliente','cliente.CI','=','pedido.Ci_Cliente')
                 ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')

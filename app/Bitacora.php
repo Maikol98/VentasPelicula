@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bitacora extends Model
 {
-    protected $table ='bitacoras';
+    protected $table ='bitacora';
     protected $primaryKey='id';
     public $timestamps=false;
 
