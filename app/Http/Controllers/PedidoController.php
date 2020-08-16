@@ -16,19 +16,20 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        $rol = auth()->user()->rol;
-        if( $rol == "Cliente"){
+
+        if( auth()->user()->rol == 'Cliente'){
             $pedido = DB::table('pedido')
                 ->join('cliente','cliente.CI','=','pedido.Ci_Cliente')
                 ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
                 ->where('cliente.CI','=',auth()->user()->idCliente)
                 ->get();
-        }else{
-            $pedido = DB::table('pedido')
-                ->join('cliente','cliente.CI','=','pedido.Ci_Cliente')
-                ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
-                ->get();
+            return view('Pedido/Pedido/index',compact('pedido'));
         }
+        
+        $pedido = DB::table('pedido')
+            ->join('cliente','cliente.CI','=','pedido.Ci_Cliente')
+            ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
+            ->get();
 
         return view('Pedido/Pedido/index',compact('pedido'));
     }
@@ -59,7 +60,7 @@ class PedidoController extends Controller
         $pedido->PrecioTotal = 0;
         $pedido->Estado = 'En Proceso';
 
-        if (auth()->user()->rol === 'Admin') {
+        if (auth()->user()->rol == 'Admin') {
             $pedido->Ci_Cliente = $request->input('cliente');
         }else{
             $pedido->Ci_Cliente = auth()->user()->idCliente;
