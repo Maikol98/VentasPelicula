@@ -94,4 +94,10 @@ class PeliculaController extends Controller
         return redirect()->route('Pelicula.index');
     }
 
+    public function lista(){
+        $peliculas = Pelicula::all();
+
+        return view('Pelicula/Home',compact('peliculas'));
+    }
+
 }
