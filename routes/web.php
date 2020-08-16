@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'PeliculaController@lista');
 
 
 
@@ -73,6 +71,9 @@ route::delete('Actor/{id}','ActorController@destroy')->name('Actor.destroy');
 
 //DIRECTOR
 Route::resource('Director', 'DirectorController');
+route::get('Actores','PeliculaactorController@create')->name('ActorPelicula.create');
+route::post('Actores','PeliculaactorController@store')->name('Actor.insert');
+
 
 //PELICULA
 route::get('Pelicula','PeliculaController@index')->name('Pelicula.index');

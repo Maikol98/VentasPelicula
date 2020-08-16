@@ -3,7 +3,7 @@
     <div class="row py-4">
         <div class="col-12 col-sm-10 col-lg-5 mx-auto">
             <form class="shadow rounded px-3 py-4"
-                action="{{route('Actor.store')}}" method="post">
+                action="{{route('Actor.insert')}}" method="post">
 
                 @csrf
 

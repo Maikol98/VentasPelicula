@@ -36,8 +36,8 @@ class PeliculaactorController extends Controller
      */
     public function store(Request $request)
     {
-
-
+        $acto = new peliculaactor($request->all());
+        $acto->save();
     }
 
     /**
