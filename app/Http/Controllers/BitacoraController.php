@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class Bitacora extends Controller
+class BitacoraController extends Controller
 {
     public function index($catego){
         $bitacora = DB::table('bitacora')->where('Categoria','=',$catego)->get();

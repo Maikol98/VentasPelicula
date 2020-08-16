@@ -11,23 +11,18 @@
                         <img src="{{$pelicula->Poster}}" class="card-img p-2">
                         <div class="card-body">
                             <div class="col">
-                                <div class="row font-weight-bold">
-                                    <label>Valoracion</label>
-                                    <label class="px-2"><i class="icon ion-md-star">4.5</i></label>
-                                    <label class="px-2">Stock:45</label>
-                                    <label class="px-2">Precio: 80bs</label>
-                                </div>
+                                <p>
+                                    <strong>Resolucion:</strong>
+                                    {{$pelicula->Resolucion}}
+                                    <br>
+                                    <strong>Idioma:</strong>
+                                    {{$pelicula->Idioma}}
+                                    <br>
+                                    <strong>Precio:</strong>
+                                    {{$pelicula->Precio}} bs
+                                </p>
                             </div>
-                            <form class=" shadow rounded px-1 py-1"
-                                action="{{route('Detallepedido.store',[$pelicula->Id,$id_Pedido])}}" method="post">
-                                @csrf
-                                <div class="form-group">
-                                    <label class="font-weight-bold">Cantidad</label>
-                                    <input type="text" name="Cantidad" class="form-control">
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-block">Añadir al Pedido</button>
-                                <a href="{{route('Pelicula.show',$pelicula->Id)}}" class="btn btn-outline-dark btn-block">Detalles</a>
-                            </form>
+                            <a href="{{route('Pelicula.show',$pelicula->Id)}}" class="btn btn-outline-dark btn-block">Detalles</a>
                         </div>
                     </div>
                 </div>

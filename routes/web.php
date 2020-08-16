@@ -113,7 +113,7 @@ Route::delete('DetalleCarrito/{Id_Carrito}/{Id_Pelicula}','DetallecarritoControl
     ->name('Detallecarrito.destroy');
 
 //BITACORA
-Route::get('Bitacora/{tipo}','bitacoraController@Bitacora')->name('Bitacora.index');
+Route::get('Bitacora/{tipo}','BitacoraController@index')->name('Bitacora.index');
 
 Route::get('ReporteIngreso',['as'=>'Reporte.ingreso','uses'=>'reporteController@ReporteIngreso']);
 Route::get('ReportePedido',['as'=>'Reporte.pedidos','uses'=>'ReporteController@ReportePedido']);
