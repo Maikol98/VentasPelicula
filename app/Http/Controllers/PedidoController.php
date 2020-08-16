@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\pedido;
+use App\Bitacora;
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\DB;
 
@@ -15,10 +16,18 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        $pedido = DB::table('pedido')
-            ->join('cliente','cliente.CI','=','pedido.Ci_Cliente')
-            ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
-            ->get();
+        if(auth()->user()->rol === 'Cliente'){
+            $pedido = DB::table('pedido')
+                ->join('cliente','cliente.CI','=','pedido.Ci_Cliente')
+                ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
+                ->where('cliente.CI','=',auth()->user()->idCliente)
+                ->get();
+        }else{
+            $pedido = DB::table('pedido')
+                ->join('cliente','cliente.CI','=','pedido.Ci_Cliente')
+                ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
+                ->get();
+        }
 
         return view('Pedido/Pedido/index',compact('pedido'));
     }
@@ -56,6 +65,15 @@ class PedidoController extends Controller
         }
 
         $pedido->save();
+
+        $bitacora = new Bitacora();
+        $bitacora->fecha = date('Y-m-d H:i:s');
+        $bitacora->nombreUser = auth()->user()->name;
+        $bitacora->accion = 'Nuevo Pedido';
+        $bitacora->tipo= auth()->user()->rol;
+        $bitacora->Categoria = 'Pedido';
+        $bitacora->save();
+
         $pedidoId = $pedido->Id;
         return redirect()->route('Detallepedido.index',$pedidoId);
     }

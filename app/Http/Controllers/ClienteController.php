@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\cliente;
+use App\Bitacora;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -53,15 +54,15 @@ class ClienteController extends Controller
         $cliente->Estado = 1;
         $cliente->save();
 
+        $bitacora = new Bitacora();
+        $bitacora->fecha = date('Y-m-d H:i:s');
+        $bitacora->nombreUser = $request->input('Nombre');
+        $bitacora->accion = 'Nuevo Cliente';
+        $bitacora->tipo= 'Cliente';
+        $bitacora->Categoria = 'Cliente';
+        $bitacora->save();
 
         return redirect()->route('Cliente.index');
-    }
-
-
-
-    public function show(cliente $cliente)
-    {
-        return view('Cliente/show',compact('cliente'));
     }
 
 
@@ -87,7 +88,13 @@ class ClienteController extends Controller
 
         $cliente->update();
 
-
+        $bitacora = new Bitacora();
+        $bitacora->fecha = date('Y-m-d H:i:s');
+        $bitacora->nombreUser = auth()->user()->name;
+        $bitacora->accion = 'Actualizar Cliente';
+        $bitacora->tipo= auth()->user()->rol;
+        $bitacora->Categoria = 'Cliente';
+        $bitacora->save();
 
         return redirect()->route('Cliente.index');
     }
@@ -99,6 +106,14 @@ class ClienteController extends Controller
         $cliente = Cliente::findOrFail($id);
         $cliente->Estado = 0;
         $cliente->update();
+
+        $bitacora = new Bitacora();
+        $bitacora->fecha = date('Y-m-d H:i:s');
+        $bitacora->nombreUser = auth()->user()->name;
+        $bitacora->accion = 'Eliminar Cliente';
+        $bitacora->tipo= auth()->user()->rol;
+        $bitacora->Categoria = 'Cliente';
+        $bitacora->save();
 
         return redirect()->route('Cliente.index');
     }

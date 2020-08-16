@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\pelicula;
+use App\Bitacora;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -30,6 +31,14 @@ class PeliculaController extends Controller
         $pelicula = new Pelicula($request->all());
         $pelicula->Stock = 0;
         $pelicula->save();
+
+        $bitacora = new Bitacora();
+        $bitacora->fecha = date('Y-m-d H:i:s');
+        $bitacora->nombreUser = auth()->user()->name;
+        $bitacora->accion = 'Nueva Pelicula';
+        $bitacora->tipo= auth()->user()->rol;
+        $bitacora->Categoria = 'Pelicula';
+        $bitacora->save();
 
         return redirect()->route('Pelicula.index');
     }
@@ -73,6 +82,14 @@ class PeliculaController extends Controller
         $pelicula->Categoria = $request->input('categoria');
 
         $pelicula->update();
+
+        $bitacora = new Bitacora();
+        $bitacora->fecha = date('Y-m-d H:i:s');
+        $bitacora->nombreUser = auth()->user()->name;
+        $bitacora->accion = 'Actualizo Pelicula';
+        $bitacora->tipo= auth()->user()->rol;
+        $bitacora->Categoria = 'Pelicula';
+        $bitacora->save();
 
         return redirect()->route('Pelicula.index');
     }

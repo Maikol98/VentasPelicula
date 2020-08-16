@@ -12,9 +12,16 @@ class CarritoController extends Controller
 
     public function index()
     {
-        $carrito = DB::table('carrito')
-        ->join('cliente', 'cliente.CI','=','carrito.CI_Cliente')
-        ->select('Id','PrecioTotal','Descripcion','Nombre')->get();
+        if (auth()->user()->rol === 'Cliente') {
+            $carrito = DB::table('carrito')
+                ->join('cliente', 'cliente.CI','=','carrito.CI_Cliente')
+                ->select('Id','PrecioTotal','Descripcion','Nombre')
+                ->where('cliente.CI','=',auth()->user()->idCliente)->get();
+        } else {
+            $carrito = DB::table('carrito')
+                ->join('cliente', 'cliente.CI','=','carrito.CI_Cliente')
+                ->select('Id','PrecioTotal','Descripcion','Nombre')->get();
+        }
         return view('Carrito/Carrito/index', compact('carrito'));
     }
 

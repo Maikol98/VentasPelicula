@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\administrador;
+use App\Bitacora;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AdministradorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function index()
     {
         $administrador = DB::table('administrador')
@@ -22,22 +20,15 @@ class AdministradorController extends Controller
         return view('Administrador/index',compact('administrador'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function create()
     {
         return view('Administrador/create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function store(Request $request)
     {
         $contra = $request->input('CI');
@@ -56,26 +47,19 @@ class AdministradorController extends Controller
 
         $administrador->save();
 
+        $bitacora = new Bitacora();
+        $bitacora->fecha = date('Y-m-d H:i:s');
+        $bitacora->nombreUser = auth()->user()->name;
+        $bitacora->accion = 'Nuevo Administrador';
+        $bitacora->tipo= auth()->user()->rol;
+        $bitacora->Categoria = 'Administrador';
+        $bitacora->save();
+
         return redirect()->route('Administrador.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\administrador  $administrador
-     * @return \Illuminate\Http\Response
-     */
-    public function show(administrador $administrador)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\administrador  $administrador
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit( $id)
     {
         $administrador = Administrador::findOrFail($id);
@@ -83,13 +67,8 @@ class AdministradorController extends Controller
         return view('Administrador/edit', compact('administrador'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\administrador  $administrador
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function update(Request $request, $id)
     {
         $administrador = Administrador::findOrFail($id);
@@ -101,16 +80,20 @@ class AdministradorController extends Controller
 
         $administrador->update();
 
+        $bitacora = new Bitacora();
+        $bitacora->fecha = date('Y-m-d H:i:s');
+        $bitacora->nombreUser = auth()->user()->name;
+        $bitacora->accion = 'Actualizar Administrador';
+        $bitacora->tipo= auth()->user()->rol;
+        $bitacora->Categoria = 'Administrador';
+        $bitacora->save();
+
         return redirect()->route('Administrador.index');
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\administrador  $administrador
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function destroy( $id)
     {
         $administrador = Administrador::findOrFail($id);
@@ -118,6 +101,14 @@ class AdministradorController extends Controller
         $administrador->Estado = 0;
 
         $administrador->update();
+
+        $bitacora = new Bitacora();
+        $bitacora->fecha = date('Y-m-d H:i:s');
+        $bitacora->nombreUser = auth()->user()->name;
+        $bitacora->accion = 'Eliminar Administrador';
+        $bitacora->tipo= auth()->user()->rol;
+        $bitacora->Categoria = 'Administrador';
+        $bitacora->save();
 
         return redirect()->route('Administrador.index');
     }

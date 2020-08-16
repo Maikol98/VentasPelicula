@@ -24,6 +24,7 @@ class DetallepedidoController extends Controller
 
         $peliculas = DB::table('pelicula')
             ->whereNotIn('Id',$todos)->get();
+            
         return view('Pedido/DetallePedido/Listado', compact('peliculas','id_Pedido'));
     }
 

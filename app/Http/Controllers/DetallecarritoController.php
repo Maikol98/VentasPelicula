@@ -9,8 +9,19 @@ use Illuminate\Support\Facades\DB;
 
 class DetallecarritoController extends Controller
 {
+    public function index( $id_carrito )
+    {
+        $todos = DB::table('detallecarrito')
+        ->select('Id_Pelicula')
+        ->where('Id_Carrito','=',$id_carrito)->pluck('Id_Pelicula');
 
-    
+
+        $peliculas = DB::table('pelicula')
+            ->whereNotIn('Id',$todos)->get();
+
+        return view('Carrito/Carrito/listaProducto',compact('peliculas','IdCarrito'));
+    }
+
 
     public function store(Request $request,$id_carrito, $id_pelicula)
     {
@@ -36,19 +47,7 @@ class DetallecarritoController extends Controller
         DB::table('carrito')->where('Id','=',$id_carrito)
         ->update(['PrecioTotal'=>$carrito->PrecioTot]);
 
-
-        // NUEVA LISTA DE LOS PRODUCTOS
-        $todos = DB::table('detallecarrito')
-        ->select('Id_Pelicula')
-        ->where('Id_Carrito','=',$id_carrito)->pluck('Id_Pelicula');
-
-
-        $peliculas = DB::table('pelicula')
-            ->whereNotIn('Id',$todos)->get();
-
-
-
-        return view('Carrito/Carrito/listaProducto',compact('peliculas','IdCarrito'));
+        return redirect()->route('Detallecarrito.index',$id_carrito);
     }
 
 

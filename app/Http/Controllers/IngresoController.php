@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ingreso;
+use App\Bitacora;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -31,6 +32,14 @@ class IngresoController extends Controller
         $ingreso->Estado = 1;
         $ingreso->save();
 
+        $bitacora = new Bitacora();
+        $bitacora->fecha = date('Y-m-d H:i:s');
+        $bitacora->nombreUser = auth()->user()->name;
+        $bitacora->accion = 'Nuevo Ingreso';
+        $bitacora->tipo= auth()->user()->rol;
+        $bitacora->Categoria = 'Ingreso';
+        $bitacora->save();
+
         $Id = $ingreso->Id;
 
         return redirect()->route('Detalleingreso.create',$Id);
@@ -54,6 +63,14 @@ class IngresoController extends Controller
         $ingreso = Ingreso::findOrFail($id);
         $ingreso->Estado = 0;
         $ingreso->update();
+
+        $bitacora = new Bitacora();
+        $bitacora->fecha = date('Y-m-d H:i:s');
+        $bitacora->nombreUser = auth()->user()->name;
+        $bitacora->accion = 'Elimino Ingreso';
+        $bitacora->tipo= auth()->user()->rol;
+        $bitacora->Categoria = 'Ingreso';
+        $bitacora->save();
 
         return redirect()->route('Ingreso.index');
     }
