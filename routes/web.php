@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'PeliculaController@lista');
+Route::get('/', 'PeliculaController@lista')->name('home');
 
 
 
@@ -121,7 +121,7 @@ Route::get('ReportePedido',['as'=>'Reporte.pedidos','uses'=>'ReporteController@R
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 
 
