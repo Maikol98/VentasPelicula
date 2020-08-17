@@ -19,19 +19,19 @@ class PedidoController extends Controller
         $rol = auth()->user()->rol;
         if( $rol == 'Cliente'){
 
-            return view('Hola',compact('rol'));
-
             $pedido = DB::table('pedido')
-                ->join('cliente','cliente.CI','=','pedido.Ci_Cliente')
+                ->join('cliente','pedido.Ci_Cliente','=','cliente.CI')
                 ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
-                ->where('cliente.CI','=',auth()->user()->idCliente)
+                ->where('cliente.CI','=',auth()->user()->idCliente)->orderBy('Id', 'desc')
                 ->get();
+
+                return view('Hola',compact('rol'));
             return view('Pedido/Pedido/index',compact('pedido'));
         }
 
         $pedido = DB::table('pedido')
-            ->join('cliente','cliente.CI','=','pedido.Ci_Cliente')
-            ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
+            ->join('cliente','pedido.Ci_Cliente','=','cliente.CI')
+            ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')->orderBy('Id', 'desc')
             ->get();
             dd($rol);
         return view('Pedido/Pedido/index',compact('pedido'));
