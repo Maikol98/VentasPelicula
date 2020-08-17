@@ -22,7 +22,7 @@ class PedidoController extends Controller
         //->join('cliente','pedido.Ci_Cliente','=','cliente.CI')
         //->select('pedido.*','cliente.Nombre')
         if( $rol == 'Cliente'){
-            return view('Hola',compact('rol','nombre'));
+            //return view('Hola',compact('rol','nombre'));
             $pedido = DB::table('pedido')
                 ->where('cliente.CI','=',$nombre)->orderBy('Id', 'desc')
                 ->get();
