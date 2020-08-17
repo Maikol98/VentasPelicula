@@ -18,12 +18,14 @@ class PedidoController extends Controller
     {
         $rol = auth()->user()->rol;
         if( $rol == 'Cliente'){
+
+            return view('Hola',compact('rol'));
+
             $pedido = DB::table('pedido')
                 ->join('cliente','cliente.CI','=','pedido.Ci_Cliente')
                 ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
                 ->where('cliente.CI','=',auth()->user()->idCliente)
                 ->get();
-                return view('Hola');
             return view('Pedido/Pedido/index',compact('pedido'));
         }
 

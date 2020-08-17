@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>La puta Madre</h1>
+    <h1>La puta Madre {{$rol}}</h1>
 </body>
 </html>
