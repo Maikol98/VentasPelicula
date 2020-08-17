@@ -12,7 +12,7 @@ class CarritoController extends Controller
 
     public function index()
     {
-        if (auth()->user()->rol === 'Cliente') {
+        if (auth()->user()->rol == 'Cliente') {
             $carrito = DB::table('carrito')
                 ->join('cliente', 'cliente.CI','=','carrito.CI_Cliente')
                 ->select('Id','PrecioTotal','Descripcion','Nombre')
@@ -42,10 +42,9 @@ class CarritoController extends Controller
         $carrito->Descripcion = $request->input('descripcion');
         $carrito->save();
 
-        $IdCarrito = $carrito->Id;
-        $peliculas = Pelicula::all();
+        $id_carrito = $carrito->Id;
 
-        return view('Carrito/Carrito/listaProducto',compact('peliculas','IdCarrito'));
+        return redirect()->route('Detallecarrito.index',$id_carrito);
     }
 
 
