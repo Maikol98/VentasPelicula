@@ -25,7 +25,7 @@
                             <tr>
                                 <th scope="row" class="text-white">{{$datos->Id}}</th>
                                 <td class="text-white">{{$datos->FechaPedido}}</td>
-                                <td class="text-white">Soy yo</td>
+                                <td class="text-white">{{$datos->Nombre}}</td>
                                 <td class="text-white">{{$datos->PrecioTotal}}</td>
                                 <td class="text-white">{{$datos->Estado}}</td>
                                 <td class="text-white">
