@@ -16,14 +16,14 @@ class PedidoController extends Controller
      */
     public function index()
     {
-
-        if( auth()->user()->rol == 'Cliente'){
+        $rol = auth()->user()->rol;
+        if( $rol == 'Cliente'){
             $pedido = DB::table('pedido')
                 ->join('cliente','cliente.CI','=','pedido.Ci_Cliente')
                 ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
                 ->where('cliente.CI','=',auth()->user()->idCliente)
                 ->get();
-            dd($pedido);
+            dd($rol);
             return view('Pedido/Pedido/index',compact('pedido'));
         }
 
@@ -31,7 +31,7 @@ class PedidoController extends Controller
             ->join('cliente','cliente.CI','=','pedido.Ci_Cliente')
             ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
             ->get();
-            dd($pedido);
+            dd($rol);
         return view('Pedido/Pedido/index',compact('pedido'));
     }
 
