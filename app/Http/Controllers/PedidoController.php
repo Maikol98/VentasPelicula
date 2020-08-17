@@ -17,23 +17,26 @@ class PedidoController extends Controller
     public function index()
     {
         $rol = auth()->user()->rol;
+        $nombre = auth()->user()->idCliente;
+
         if( $rol == 'Cliente'){
 
             $pedido = DB::table('pedido')
                 ->join('cliente','pedido.Ci_Cliente','=','cliente.CI')
-                ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')
-                ->where('cliente.CI','=',auth()->user()->idCliente)->orderBy('Id', 'desc')
+                ->select('pedido.*','cliente.Nombre')
+                ->where('cliente.CI','=',$nombre)->orderBy('pedido.Id', 'desc')
                 ->get();
 
-                return view('Hola',compact('rol'));
+            return view('Hola',compact('rol','nombre'));
+
             return view('Pedido/Pedido/index',compact('pedido'));
         }
 
         $pedido = DB::table('pedido')
             ->join('cliente','pedido.Ci_Cliente','=','cliente.CI')
-            ->select('Id','FechaPedido','PrecioTotal','pedido.Estado','Nombre')->orderBy('Id', 'desc')
+            ->select('pedido.*','cliente.Nombre')->orderBy('pedido.Id', 'desc')
             ->get();
-            dd($rol);
+            
         return view('Pedido/Pedido/index',compact('pedido'));
     }
 
