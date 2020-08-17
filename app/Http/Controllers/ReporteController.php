@@ -18,6 +18,7 @@ class ReporteController extends Controller
         return $pdf->stream('Reporte.pdf');
     }
 
+
     public function ReportePedido()
     {
         $datos=DB::table('pedido')->join('detallepedido','detallepedido.Id_Pedido','=','Pedido.Id')
